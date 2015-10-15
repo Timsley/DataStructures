@@ -11,7 +11,7 @@ BIN_TARGET = ${DIR_BIN}/${TARGET}
 
 
 DIRS_Spk   += src
-#DIRS_Spk   += src/part1
+DIRS_Spk   += src/part1
 
 
 DIR_FILES  = $(foreach dir, $(DIRS_Spk),$(wildcard $(dir)/*.c))
