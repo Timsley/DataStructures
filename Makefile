@@ -12,6 +12,8 @@ BIN_TARGET = ${DIR_BIN}/${TARGET}
 
 DIRS_Spk   += src
 DIRS_Spk   += src/part1
+DIRS_Spk   += src/sort
+DIRS_Spk   += src/time
 
 
 DIR_FILES  = $(foreach dir, $(DIRS_Spk),$(wildcard $(dir)/*.c))
@@ -26,7 +28,8 @@ $(TARGET):$(DIR_OBJS)
 	
 .PHONY:clean
 clean:
-	find ${DIR_OBJ} -name *.o | xargs rm -rf {}
+#	find ${DIR_OBJ} -name *.o | xargs rm -rf {}
+	find ./ -name *.o | xargs rm -rf {}
 #rm -rf ${DIR_BIN}/${TARGET}
 	rm -rf ${TARGET}
 
