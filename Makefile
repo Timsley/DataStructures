@@ -11,7 +11,8 @@ BIN_TARGET = ${DIR_BIN}/${TARGET}
 
 
 DIRS_Spk   += src
-DIRS_Spk   += src/part1
+#DIRS_Spk   += src/part1
+DIRS_Spk   += src/part2
 DIRS_Spk   += src/sort
 DIRS_Spk   += src/time
 

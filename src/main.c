@@ -6,12 +6,13 @@
 
 int main (int argc, const char * argv[]) 
 {
-	int i;
+//	int i;
 
 //	time_start();
 
 //	for(i=0; i<FUNC_EXEC_TIME; i++)
-		part1_main_test();
+    //part1_3_main_test();
+    part2_main_test();
 
 //	time_stop();
 //	time_print();
