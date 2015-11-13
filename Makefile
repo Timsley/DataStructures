@@ -12,7 +12,8 @@ BIN_TARGET = ${DIR_BIN}/${TARGET}
 
 DIRS_Spk   += src
 #DIRS_Spk   += src/part1
-DIRS_Spk   += src/part2
+#DIRS_Spk   += src/part2
+DIRS_Spk   += src/part3
 DIRS_Spk   += src/sort
 DIRS_Spk   += src/time
 
@@ -24,7 +25,7 @@ DIR_OBJS   = $(patsubst %.c,%.o,$(DIR_FILES))
 $(ALL):$(TARGET)
 
 $(TARGET):$(DIR_OBJS)
-	$(CC) -o $(TARGET) $(DIR_OBJS) $(CFLAGES) #-pthread
+	$(CC) -o $(TARGET) $(DIR_OBJS) $(CFLAGES)
 	-$(MOVE) $(DIR_OBJS) ./$(DIR_OBJ)
 	
 .PHONY:clean
