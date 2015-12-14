@@ -12,7 +12,7 @@ int main (int argc, const char * argv[])
 
 //	for(i=0; i<FUNC_EXEC_TIME; i++)
     //part1_3_main_test();
-    part3_list_main_test();
+    link_list_main_test();
 
 //	time_stop();
 //	time_print();

@@ -2,6 +2,21 @@
 #define __PART3_LIST_H__
 
 typedef int ElementType;
+
+typedef struct _NODE_T
+{
+    ElementType element;
+    struct _NODE_T *next;
+}NODE_T;
+
+typedef struct _NODE_T * LINK_LIST_T;
+typedef struct _NODE_T * POSITION;
+
+
+#define LISTR_OK                              ((INT32)0)
+#define LISTR_FAIL                            ((INT32)-1)
+
+#if 0
 struct node;
 typedef struct node * PtrToNode;
 typedef PtrToNode List;
@@ -26,5 +41,8 @@ Position Header();
 Position First(List L);
 Position Advance(List L);
 ElementType Retrieve(Position P);
+#endif
+
+extern VOID link_list_main_test(VOID);
 
 #endif
