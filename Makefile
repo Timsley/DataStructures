@@ -1,37 +1,44 @@
+CC = gcc
 MOVE = mv
+
+
 DIR_INC = ./include
 DIR_OBJ = ./obj
-DIR_BIN = ./bin
-CC = gcc
-CFLAGS = -g -Wall -I${DIR_INC}
+
+
+DIR_LIB_CUNIT = /usr/local/lib
+DIR_INC_CUNIT = /usr/local/include/CUnit
+
+
+CFLAGS = -g -Wall -I$(DIR_INC) -I$(DIR_INC_CUNIT)
+LDFLAGS = -L$(DIR_LIB_CUNIT) 
+LIBS = -lcunit
+
 
 TARGET = main
-BIN_TARGET = ${DIR_BIN}/${TARGET}
 
 
+DIRS_SRC   += src
+#DIRS_SRC   += src/part1
+#DIRS_SRC   += src/part2
+DIRS_SRC   += src/part3
+DIRS_SRC   += src/sort
+DIRS_SRC   += src/time
+DIRS_SRC   += src/cunit_test
 
-DIRS_Spk   += src
-#DIRS_Spk   += src/part1
-#DIRS_Spk   += src/part2
-DIRS_Spk   += src/part3
-DIRS_Spk   += src/sort
-DIRS_Spk   += src/time
 
-
-DIR_FILES  = $(foreach dir, $(DIRS_Spk),$(wildcard $(dir)/*.c))
+DIR_FILES  = $(foreach dir, $(DIRS_SRC),$(wildcard $(dir)/*.c))
 DIR_OBJS   = $(patsubst %.c,%.o,$(DIR_FILES))
 
 
 $(ALL):$(TARGET)
 
 $(TARGET):$(DIR_OBJS)
-	$(CC) -o $(TARGET) $(DIR_OBJS) $(CFLAGES)
+	$(CC) -o $(TARGET) $(DIR_OBJS) $(CFLAGS) $(LDFLAGS) $(LIBS)
 	-$(MOVE) $(DIR_OBJS) ./$(DIR_OBJ)
 	
+
 .PHONY:clean
 clean:
-#	find ${DIR_OBJ} -name *.o | xargs rm -rf {}
-	find ./ -name *.o | xargs rm -rf {}
-#rm -rf ${DIR_BIN}/${TARGET}
+	find ${DIR_OBJ} -name *.o | xargs rm -rf {}
 	rm -rf ${TARGET}
-

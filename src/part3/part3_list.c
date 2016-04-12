@@ -4,12 +4,12 @@
 #include "part3_list.h"
 
 
-LINK_LIST_T link_list_Init(VOID)
+LINK_LIST_T link_list_init(VOID)
 {
     LINK_LIST_T pList = (LINK_LIST_T)malloc(sizeof(NODE_T)); 
     if(!pList)
     {
-        printf("link_list_Init malloc failed! \n");
+        printf("link_list_init malloc failed! \n");
         return NULL;
     }
     
@@ -19,46 +19,126 @@ LINK_LIST_T link_list_Init(VOID)
 }
 
 BOOL link_list_is_empty(LINK_LIST_T pList)
-{
+{    
+    LINK_LIST_CHK_FAIL(pList, TRUE);
+    
     return pList->next == NULL;
 }
 
-
-/*
-**  How to distinguish the same element
-*/
-BOOL link_list_is_last(ElementType element, LINK_LIST_T list)
+BOOL link_list_is_last(ElementType element, LINK_LIST_T pList)
 {
-    LINK_LIST_T temp;
-    temp = list->next;
+    LINK_LIST_CHK_FAIL(pList, FALSE);
     
-    while(temp && temp->element != element)
-        temp = temp->next;
+    LINK_LIST_T pTemp = pList;
 
-    if(temp == NULL && temp->element == element)
+    while(pTemp->next != NULL)      // fine the last node
+        pTemp = pTemp->next;
+
+    if(pTemp->element == element)
         return TRUE;
-    else
+    else 
         return FALSE;
 }
 
-POSITION link_list_find(ElementType element, LINK_LIST_T list)
+/****************************************************************************
+***
+*** Check the element in the list or not, if find, return TRUE, if not find, return FALSE
+***
+****************************************************************************/
+BOOL link_list_find_element(ElementType element, LINK_LIST_T pList)
 {
-    POSITION temp;
-    temp = list->next;
+    LINK_LIST_CHK_FAIL(pList, FALSE);
     
-    while(temp)
+    LINK_LIST_T pTemp = pList->next;
+
+    while(pTemp)
     {
-        if(temp->element == element)
-            return temp;
-        temp = temp->next;
+        if(pTemp->element == element)
+            return TRUE;
+        pTemp = pTemp->next;
     }
 
-    return NULL;
+    return FALSE;
 }
 
+/****************************************************************************
+***
+*** Check the element in the list or not, if find, return the index, if not find, return 0
+***
+****************************************************************************/
+INT32 link_list_find_element_ret_index(ElementType element, LINK_LIST_T pList)
+{
+    LINK_LIST_CHK_FAIL(pList, LISTR_FAIL);
+    
+    LINK_LIST_T pTemp = pList->next;
+    INT32 index = 0;
+
+    while(pTemp)
+    {
+        index++;
+        if(pTemp->element == element)
+            return index;
+        pTemp = pTemp->next;
+    }
+
+    return 0;
+}
+
+/****************************************************************************
+***
+***  Find the element by the index, if find, it can get the element, if not, return FALSE
+***
+****************************************************************************/
+BOOL link_list_find_by_index(ElementType *element, INT32 index, LINK_LIST_T pList)
+{
+    LINK_LIST_CHK_FAIL(pList, FALSE);
+    
+    LINK_LIST_T pTemp = pList->next;
+    INT32 i = 1;
+
+    while(pTemp && i<index)
+    {
+        pTemp = pTemp->next;
+        i++;
+    }
+
+    if(!pTemp || i>index)
+    {
+        printf("Cannot find the index, invalid args!\n");
+        return FALSE;
+    }
+
+    *element = pTemp->element;
+    
+    return TRUE;
+}
+
+POSITION link_list_find_previous(ElementType element, LINK_LIST_T pList)
+{
+    LINK_LIST_CHK_FAIL(pList, NULL);
+    
+    LINK_LIST_T pTemp = pList;
+    LINK_LIST_T qTemp =  pTemp;
+
+    while(pTemp && pTemp->element != element)
+    {
+        qTemp = pTemp;
+        pTemp = pTemp->next;
+    }
+
+    if(!pTemp)
+    {
+        printf("Cannot find the element in the list!\n");
+        return NULL;
+    }
+    
+    return qTemp;
+}
 
 INT32 link_list_insert_at_tail(ElementType element, LINK_LIST_T pList)
 {
+    LINK_LIST_CHK_FAIL(pList, LISTR_FAIL);
+    
     LINK_LIST_T pTemp = pList;
     
     while(pTemp->next  != NULL)
@@ -81,9 +161,130 @@ INT32 link_list_insert_at_tail(ElementType element, LINK_LIST_T pList)
    return LISTR_OK;
 }
 
+INT32 link_list_insert_at_head(ElementType element, LINK_LIST_T pList)
+{
+    LINK_LIST_CHK_FAIL(pList, LISTR_FAIL);
+
+    LINK_LIST_T pTemp = pList;
+    LINK_LIST_T pNext = pList->next;
+
+    LINK_LIST_T node = (LINK_LIST_T)malloc(sizeof(NODE_T));
+    if(!node)
+    {
+        printf("link_list_insert_at_head malloc failed! \n");
+        return LISTR_FAIL;
+    }
+
+    node->element = element;
+    node->next = pNext;
+
+    pTemp->next= node;   
+
+    return LISTR_OK;
+}
+
+INT32 link_list_insert_by_index(ElementType element, INT32 index, LINK_LIST_T pList)
+{
+    LINK_LIST_CHK_FAIL(pList, LISTR_FAIL);
+    
+    LINK_LIST_T pTemp = pList;
+    INT32 i = 1; 
+    
+    while(pTemp && i<index)
+    {
+        pTemp = pTemp->next;
+        i++;
+    }
+
+    if(!pTemp || i>index)
+    {
+        printf("The index is not exist! \n");
+        return LISTR_FAIL;        
+    }
+    
+    LINK_LIST_T node = (LINK_LIST_T)malloc(sizeof(NODE_T));
+    if(!node)
+    {
+        printf("link_list_insert_at_head malloc failed! \n");
+        return LISTR_FAIL;
+    }
+    
+    node->element = element;
+    node->next = pTemp->next;
+    pTemp->next = node;
+
+    return LISTR_OK;
+}
+
+INT32 link_list_delete_by_index(ElementType *element, INT32 index, LINK_LIST_T pList)
+{
+    LINK_LIST_CHK_FAIL(pList, LISTR_FAIL);
+    
+    LINK_LIST_T pTemp = pList;
+    LINK_LIST_T qTemp;
+    INT32 i=1;
+
+    while(pTemp->next && i<index)
+    {
+        pTemp = pTemp->next;
+        i++;
+    }
+
+    if(pTemp->next == NULL || i>index)
+    {
+        printf("The index is not exist\n");
+        return LISTR_FAIL;
+    }
+    
+    qTemp = pTemp->next;
+    *element = qTemp->element;
+    pTemp->next = qTemp->next;
+    
+    free(qTemp);
+    
+    return LISTR_OK;
+}
+
+INT32 link_list_get_list_len(LINK_LIST_T pList)
+{    
+    LINK_LIST_CHK_FAIL(pList, LISTR_FAIL);
+    
+    LINK_LIST_T pTemp = pList;
+    INT32 len = 0;
+
+    if(!pList)
+    {
+        printf("The link list is uninit, pls init it\n");
+        return LISTR_FAIL;
+    }
+    
+    while(pTemp->next)
+    {
+        len++;
+        pTemp = pTemp->next;
+    }
+
+    return len;
+}
+
+INT32 link_list_uninit(LINK_LIST_T *pList)
+{
+    LINK_LIST_T pTemp;
+
+    while(*pList)
+    {        
+        pTemp = (*pList)->next;
+        free(*pList);
+        *pList = pTemp;
+    }
+
+    return LISTR_OK;
+}
 
 VOID link_list_traverse(LINK_LIST_T pList)
 {
+    LINK_LIST_CHK_FAIL(pList, (void)LISTR_FAIL);
+    
     LINK_LIST_T pTemp = pList->next;
 
     while(pTemp != NULL)
@@ -93,69 +294,44 @@ VOID link_list_traverse(LINK_LIST_T pList)
     }
 }
 
+
 VOID link_list_main_test(VOID)
 {
-    ElementType num1, num2, num3;
-    LINK_LIST_T pList = link_list_Init();
-    // list = (LINK_LIST_T)malloc(sizeof(NODE_T)); 
-    //list->next = NULL;
-   // list->element = 99;
+    //ElementType getNum, delNum;
+    INT32 i;
+    POSITION position;
+    LINK_LIST_T pList = link_list_init();
     
-    num1 = 1, num2=2, num3=3;
-
-    printf("list empty=%d\n", link_list_is_empty(pList));
-
-    link_list_insert_at_tail(num1, pList);
-    printf("list empty=%d\n", link_list_is_empty(pList));
-    link_list_insert_at_tail(num2, pList);
-    //link_list_insert_at_tail(num3, list);
-    //link_list_insert_at_tail(&list, 1, num1);
-    //link_list_insert_at_tail(&list, 1, num2);
-    //link_list_insert_at_tail(&list, 1, num3);
-
+    for(i=1; i<=10; i++)
+        link_list_insert_at_tail(i, pList);
 
     link_list_traverse(pList);
-}
 
-
-
-
-/*
-case 1: it is last element
-case 2: Cannot find the element in the list
-case 3: Can find the element in the list
-case 4: Maybe there have same elements
-*/
-VOID link_list_delete(ElementType element, LINK_LIST_T list)
-{
-    POSITION pos, temp;
-    pos = list->next;
-
-    while(pos)
-    {
-        if(pos->next->element == element)       // if there have same element, pos->next will point to NULL
-        {
-            temp = pos->next->next;
-            pos->next = NULL;
-            free(temp);
-            break;
-        }
-        else
-        {
-            pos = pos->next;
-        }
-        #if 0
-        if(pos->element == element)
-        {
-            temp = pos->next;
-            pos->next = temp->next;
-            free(temp);
-        }
-        pos = pos->next;
-        #endif
-    }
+    position = link_list_find_previous(11, pList);
+    if(position != NULL)
+        printf("find the previous element=%d\n", position->element);
+    #if 0
+    link_list_find_by_index(&getNum, 3, pList);
+    printf("get num=%d\n", getNum);
+    printf("have num=%d\n", link_list_find_element(0, pList));
+    printf("ret index=%d\n", link_list_find_element_ret_index(1, pList));
     
+    //link_list_insert_at_tail(num2, pList);
+    //link_list_insert_at_tail(num3, pList);
+    //link_list_insert_at_head(num3, pList);
+    //link_list_insert_by_index(num1, 1, pList);
+    //printf("get_list_len=%d\n", link_list_get_list_len(pList));
+    printf("get_list_len=%d\n", link_list_get_list_len(pList));
+
+    link_list_delete_by_index(&delNum, 1, pList);    
+    link_list_delete_by_index(&delNum, 2, pList);    
+    printf("del num=%d\n", delNum);
+    link_list_uninit(&pList);
+    //printf("get_list_len=%d\n", link_list_get_list_len(pList));
+    //printf("link_list_is_empty=%d\n", link_list_is_empty(pList));
+    #endif
 }
+
 
 #if 0
 
@@ -192,11 +368,6 @@ Position FindPrevious(ElementType X, List L)
     }
 
     return P;
-}
-
-void Insert(ElementType X, List L, Position P)
-{
-
 }
 
 List MakeEmpty(List L);
