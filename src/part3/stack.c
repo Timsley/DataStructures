@@ -80,7 +80,13 @@ int stack_make_empty(STACK * stack)
 
 void stack_traverse(STACK * stack)
 {
+    STACK_CHECK_FAIL(stack);
 
+    while(stack && stack->next)
+    {
+        printf("element=%d\n", stack->next->Element);
+        stack = stack->next;
+    }
 }
 
 void stack_main_test(void)
@@ -93,8 +99,10 @@ void stack_main_test(void)
     stack_push(stack, &c);
 
     stack_pop(stack);
-    stack_pop(stack);
+    //stack_pop(stack);
     //stack_pop(stack);
 
     printf("top=%d\n", stack_top(stack));
+
+    stack_traverse(stack);
 }
