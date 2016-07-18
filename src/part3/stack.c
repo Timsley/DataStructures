@@ -78,7 +78,7 @@ int stack_make_empty(STACK * stack)
     return STACK_RET_OK;
 }
 
-void stack_traverse(STACK * stack)
+int stack_traverse(STACK * stack)
 {
     STACK_CHECK_FAIL(stack);
 
@@ -87,6 +87,8 @@ void stack_traverse(STACK * stack)
         printf("element=%d\n", stack->next->Element);
         stack = stack->next;
     }
+
+    return 0;
 }
 
 void stack_main_test(void)
