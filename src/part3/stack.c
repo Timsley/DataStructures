@@ -37,6 +37,11 @@ int stack_pop(STACK * stack)
         stack->next = stack->next->next;
         free(temp);
     }
+    else
+    {
+        printf("stack is empty\n");
+        return STACK_RET_NG;
+    }
 
     return STACK_RET_OK;
 }
@@ -84,7 +89,7 @@ int stack_traverse(STACK * stack)
 
     while(stack && stack->next)
     {
-        printf("element=%d\n", stack->next->Element);
+        printf("element=%c\n", stack->next->Element);
         stack = stack->next;
     }
 
@@ -93,6 +98,7 @@ int stack_traverse(STACK * stack)
 
 void stack_main_test(void)
 {
+#if 0
     int a=1, b=2, c=3;
     STACK * stack = stack_init();
 
@@ -107,4 +113,5 @@ void stack_main_test(void)
     printf("top=%d\n", stack_top(stack));
 
     stack_traverse(stack);
+#endif    
 }

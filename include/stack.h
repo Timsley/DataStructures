@@ -6,20 +6,9 @@
 #define STACK_RET_OK  (int)1  
 #define STACK_RET_NG  (int)(-1)
 
-typedef int ElemType;
+//typedef int ElemType;
+typedef char ElemType;
 
-
-#if 0
-struct Node;
-typedef struct Node * PtrToNode;
-typedef PtrToNode Stack;
-
-struct Node
-{
-    ElemType Element;
-    PtrToNode * next;
-};
-#endif
 
 typedef struct STACK_T 
 {
@@ -41,6 +30,14 @@ typedef struct STACK_T NODE;
             }while(0)  
 
 
+
+extern STACK * stack_init(void);
+extern bool stack_is_empty(STACK * stack);
+extern int stack_pop(STACK * stack);
+extern int stack_push(STACK * stack, ElemType * ele);
+extern ElemType stack_top(STACK * stack);
+extern int stack_make_empty(STACK * stack);
+extern int stack_traverse(STACK * stack);
 extern void stack_main_test(void);
 
 
