@@ -68,7 +68,7 @@ ElemType stack_top(STACK * stack)
         return stack->next->Element;
     }
 
-    return (ElemType)NULL;
+    return (ElemType)0;
 }
 
 int stack_make_empty(STACK * stack)
