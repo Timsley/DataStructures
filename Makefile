@@ -10,9 +10,9 @@ DIR_LIB_CUNIT = /usr/local/lib
 DIR_INC_CUNIT = /usr/local/include/CUnit
 
 
-CFLAGS = -g -Wall -I$(DIR_INC) #-I$(DIR_INC_CUNIT)
-LDFLAGS = #-L$(DIR_LIB_CUNIT) 
-LIBS = #-lcunit
+CFLAGS = -g -Wall -I$(DIR_INC) -I$(DIR_INC_CUNIT)
+LDFLAGS = -L$(DIR_LIB_CUNIT) 
+LIBS = -lcunit
 
 
 TARGET = main
@@ -24,7 +24,7 @@ DIRS_SRC   += src
 DIRS_SRC   += src/part3
 DIRS_SRC   += src/sort
 DIRS_SRC   += src/time
-#DIRS_SRC   += src/cunit_test
+DIRS_SRC   += src/cunit_test
 
 
 DIR_FILES  = $(foreach dir, $(DIRS_SRC),$(wildcard $(dir)/*.c))

@@ -267,15 +267,15 @@ INT32 link_list_get_list_len(LINK_LIST_T pList)
     return len;
 }
 
-INT32 link_list_uninit(LINK_LIST_T *pList)
+INT32 link_list_uninit(LINK_LIST_T pList)
 {
     LINK_LIST_T pTemp;
 
-    while(*pList)
+    while(pList)
     {        
-        pTemp = (*pList)->next;
-        free(*pList);
-        *pList = pTemp;
+        pTemp = pList->next;
+        free(pList);
+        pList = pTemp;
     }
 
     return LISTR_OK;
@@ -299,82 +299,15 @@ VOID link_list_main_test(VOID)
 {
     //ElementType getNum, delNum;
     INT32 i;
-    POSITION position;
     LINK_LIST_T pList = link_list_init();
     
     for(i=1; i<=10; i++)
         link_list_insert_at_tail(i, pList);
 
-    link_list_traverse(pList);
-
-    position = link_list_find_previous(11, pList);
-    if(position != NULL)
-        printf("find the previous element=%d\n", position->element);
-    #if 0
-    link_list_find_by_index(&getNum, 3, pList);
-    printf("get num=%d\n", getNum);
-    printf("have num=%d\n", link_list_find_element(0, pList));
-    printf("ret index=%d\n", link_list_find_element_ret_index(1, pList));
+    link_list_traverse(pList);    
     
-    //link_list_insert_at_tail(num2, pList);
-    //link_list_insert_at_tail(num3, pList);
-    //link_list_insert_at_head(num3, pList);
-    //link_list_insert_by_index(num1, 1, pList);
-    //printf("get_list_len=%d\n", link_list_get_list_len(pList));
-    printf("get_list_len=%d\n", link_list_get_list_len(pList));
-
-    link_list_delete_by_index(&delNum, 1, pList);    
-    link_list_delete_by_index(&delNum, 2, pList);    
-    printf("del num=%d\n", delNum);
-    link_list_uninit(&pList);
-    //printf("get_list_len=%d\n", link_list_get_list_len(pList));
-    //printf("link_list_is_empty=%d\n", link_list_is_empty(pList));
-    #endif
-}
-
-
-#if 0
-
-void Delete(ElementType X, List L)
-{
-    Position P, tempCell;
-    
-    if(IsEmpty(L))
-        return;
-
-    P = L->Next;
-    
-    while(!P)
+    if(pList)
     {
-        if(X == P->Element)
-        {
-            tempCell = P->Next;
-            P->Next = tempCell->Next;
-            free(tempCell);
-         }
-        P = P->Next;
+        link_list_uninit(pList);
     }
 }
-
-
-Position FindPrevious(ElementType X, List L)
-{
-    Position P;
-    P = L;
-    
-    while(P->Next != NULL && P->Next->Element != X)
-    {
-        P = P->Next;
-    }
-
-    return P;
-}
-
-List MakeEmpty(List L);
-void DeleteList(List L);
-Position Header();
-Position First(List L);
-Position Advance(List L);
-ElementType Retrieve(Position P);
-#endif
-

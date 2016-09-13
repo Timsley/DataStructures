@@ -32,7 +32,7 @@ extern INT32 link_list_insert_at_head(ElementType element, LINK_LIST_T pList);
 extern INT32 link_list_insert_by_index(ElementType element, INT32 index, LINK_LIST_T pList);
 extern INT32 link_list_delete_by_index(ElementType *element, INT32 index, LINK_LIST_T pList);
 extern INT32 link_list_get_list_len(LINK_LIST_T pList);
-extern INT32 link_list_uninit(LINK_LIST_T *pList);
+extern INT32 link_list_uninit(LINK_LIST_T pList);
 extern VOID link_list_traverse(LINK_LIST_T pList);
 
 #if 0

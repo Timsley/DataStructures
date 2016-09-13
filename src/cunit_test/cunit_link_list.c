@@ -42,7 +42,7 @@ void link_list_test_case2(void)
     link_list_insert_at_tail(1, pList);
     
     retValue = link_list_is_empty(pList);
-    expectValue = FALSE;    
+    expectValue = TRUE;    
 
     CU_ASSERT(retValue == expectValue);
 }
@@ -147,8 +147,9 @@ CU_TestInfo link_list_test_case[] = {
 };
 
 //suite info
-CU_SuiteInfo suites[] = {
-    { "addint long test", cunit_link_list_init, cunit_link_list_cleanup, NULL, NULL, link_list_test_case },
+CU_SuiteInfo suites[] = 
+{
+    { "Test For Linked List", cunit_link_list_init, cunit_link_list_cleanup, NULL, NULL, link_list_test_case },
     CU_SUITE_INFO_NULL,
 };
 
