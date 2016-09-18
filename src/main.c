@@ -15,7 +15,8 @@ int main (int argc, const char * argv[])
     //part1_3_main_test();
 //    link_list_main_test();
     //polynomial_main_test();
-    radix_sort_main_test();
+    //radix_sort_main_test();
+    doubly_linked_list_main_test();
 
 //cunit_test_main();
 
