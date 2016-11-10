@@ -98,8 +98,9 @@ int stack_traverse(STACK * stack)
 
 void stack_main_test(void)
 {
-#if 0
-    int a=1, b=2, c=3;
+    //int a=1, b=2, c=3;
+    char a='q', b='w', c='n';
+    
     STACK * stack = stack_init();
 
     stack_push(stack, &a);
@@ -110,8 +111,7 @@ void stack_main_test(void)
     //stack_pop(stack);
     //stack_pop(stack);
 
-    printf("top=%d\n", stack_top(stack));
+    printf("top=%c\n", stack_top(stack));
 
     stack_traverse(stack);
-#endif    
 }
