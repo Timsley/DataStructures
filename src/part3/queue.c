@@ -51,6 +51,14 @@ ElementType queue_back(QUEUE *queue)
 
 int queue_in(QUEUE *queue, ElementType elem)
 {
+#if 0
+    if(true == queue_is_full(queue))
+    {
+        printf("Queue is full\n");
+        return -1;
+    }
+#endif
+
     Node *node = (Node *)malloc(sizeof(Node));
     if(NULL == node)
     {
@@ -63,6 +71,7 @@ int queue_in(QUEUE *queue, ElementType elem)
     node->next = queue->next;
     
     queue->next = node;
+    //queue->length++;
 
     return 0;
 }
@@ -74,7 +83,7 @@ void queue_out(QUEUE *queue)
     q = temp = queue;
 
     if(!queue || !queue->next)
-        return -1;
+        return;
 
     while(q->next)
     {
@@ -83,6 +92,7 @@ void queue_out(QUEUE *queue)
     }
 
     temp->next = NULL;
+    //queue->length--;
     
     printf("out value=%d\n", q->value);
     free(q);     
@@ -109,7 +119,18 @@ void queue_main_test(void)
 
     queue_in(q, 1);
     queue_in(q, 2);
-    queue_out(q);
+    queue_in(q, 3);
+    queue_in(q, 4);
+    queue_in(q, 5);
+    queue_in(q, 6);
+    queue_in(q, 7);
+    queue_in(q, 8);
+    queue_in(q, 9);
+    queue_in(q, 10);
+    queue_in(q, 11);
+    //queue_out(q);
+    printf("front:%d\n", queue_front(q));
+    printf("back:%d\n", queue_back(q));
 
     queue_traverse(q);
 }

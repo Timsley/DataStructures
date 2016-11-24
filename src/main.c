@@ -13,11 +13,12 @@ int main (int argc, const char * argv[])
 
 //	for(i=0; i<FUNC_EXEC_TIME; i++)
     //part1_3_main_test();
-//    link_list_main_test();
+    //link_list_main_test();
     //polynomial_main_test();
     //radix_sort_main_test();
-    //doubly_linked_list_main_test();
-    queue_main_test();
+    multi_lists_main_test();
+//    doubly_linked_list_main_test();
+    //array_queue_main_test();
 //    circularly_linked_list_main();
 
 //cunit_test_main();

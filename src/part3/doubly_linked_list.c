@@ -12,7 +12,7 @@ typedef struct Node_T
 {
 	ElemType value;
 	int length;
-	struct Node_T * previous;
+	struct Node_T * prev;
 	struct Node_T * next;
 }Node;
 
@@ -31,7 +31,7 @@ DList * doubly_linked_list_init(void)
 
 	memset(dlist, 0, sizeof(DList));
 	dlist->length = 0;
-	dlist->previous = NULL;
+	dlist->prev = NULL;
 	dlist->next = NULL;	
 
 	return dlist;
@@ -85,7 +85,7 @@ void doubly_linked_list_insert(DList * dlist, ElemType value)
 	insertElem->value = value;
 
 	pDList->next = insertElem;
-	insertElem->previous = pDList;
+	insertElem->prev = pDList;
 
 	dlist->length++;
 }
@@ -115,12 +115,12 @@ void doubly_linked_list_delete_by_index(DList * dlist, int index)
 
 	if(pDList->next == NULL)
 	{
-		pDList->previous->next = pDList->next;
+		pDList->prev->next = pDList->next;
 	}
 	else
 	{
-		pDList->next->previous = pDList->previous;
-		pDList->previous->next = pDList->next;
+		pDList->next->prev = pDList->prev;
+		pDList->prev->next = pDList->next;
 	}
 	dlist->length--;
 	free(pDList);		/* It need to free the delete element */
@@ -149,10 +149,10 @@ void doubly_linked_list_traverse_backward(DList * dlist)
 	while(pDList->next)
 		pDList = pDList->next;
 	
-	while(pDList->previous)
+	while(pDList->prev)
 	{
 		printf("%3d  ", pDList->value);
-		pDList = pDList->previous;
+		pDList = pDList->prev;
 	}
 
 	printf("\n");

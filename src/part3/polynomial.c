@@ -63,8 +63,8 @@ void polynomial_plus(Polynomial poly1, Polynomial poly2, Polynomial * retPoly)
 
     while(tempA&&tempB)
     {
-        printf("A  :  coefficient:%2d, exponent:%2d\n", tempA->coefficient, tempA->exponent);
-        printf("B  :  coefficient:%2d, exponent:%2d\n", tempB->coefficient, tempB->exponent);
+        //printf("A  :  coefficient:%2d, exponent:%2d\n", tempA->coefficient, tempA->exponent);
+        //printf("B  :  coefficient:%2d, exponent:%2d\n", tempB->coefficient, tempB->exponent);
         
         retValue = (Polynomial)malloc(sizeof(NODE_T));
         memset(retValue, 0, sizeof(NODE_T));
@@ -88,7 +88,7 @@ void polynomial_plus(Polynomial poly1, Polynomial poly2, Polynomial * retPoly)
             retValue->exponent = tempB->exponent;  
             tempB = tempB->next;         
         }
-        printf("Sum : coefficient:%2d, exponent:%2d\n\n", retValue->coefficient, retValue->exponent);
+        //printf("Sum : coefficient:%2d, exponent:%2d\n\n", retValue->coefficient, retValue->exponent);
         head->next = retValue;
         head = head->next;
     }
@@ -105,7 +105,7 @@ void polynomial_plus(Polynomial poly1, Polynomial poly2, Polynomial * retPoly)
         break;
     }
 
-    printf("\n\n");
+    printf("\n");
 }
 
 
@@ -151,10 +151,13 @@ void polynomial_main_test(void)
     
     Polynomial retValue = (Polynomial)malloc(sizeof(NODE_T));
     memset(retValue, 0, sizeof(NODE_T));
-
-    //polynomial_traverse(poly1->next);
-    //polynomial_traverse(poly2->next);
+	
+    printf("Polynomial A:\n");
+    polynomial_traverse(poly1->next);
+    printf("\nPolynomial B:\n");
+    polynomial_traverse(poly2->next);
    
     polynomial_plus(poly1, poly2, &retValue);
+    printf("\nPolynomial after plus :\n");
     polynomial_traverse(retValue->next);
 }

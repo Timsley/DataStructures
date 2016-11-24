@@ -297,7 +297,6 @@ VOID link_list_traverse(LINK_LIST_T pList)
 
 VOID link_list_main_test(VOID)
 {
-    //ElementType getNum, delNum;
     INT32 i;
     LINK_LIST_T pList = link_list_init();
     
