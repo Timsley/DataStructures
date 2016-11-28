@@ -23,7 +23,6 @@ ArrQueue * array_queue_create(void)
 
     queue->front = 0;
     queue->rear = 0;
-    queue->size = 0;
 
     return queue;
 }

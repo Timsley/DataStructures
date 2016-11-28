@@ -6,8 +6,8 @@
 #define STACK_RET_OK  (int)1  
 #define STACK_RET_NG  (int)(-1)
 
-//typedef int ElemType;
-typedef char ElemType;
+typedef int ElemType;
+//typedef char ElemType;
 
 
 typedef struct STACK_T 
@@ -33,8 +33,8 @@ typedef struct STACK_T NODE;
 
 extern STACK * stack_init(void);
 extern bool stack_is_empty(STACK * stack);
-extern int stack_pop(STACK * stack);
-extern int stack_push(STACK * stack, ElemType * ele);
+extern ElemType stack_pop(STACK * stack);
+extern int stack_push(STACK * stack, ElemType ele);
 extern ElemType stack_top(STACK * stack);
 extern int stack_make_empty(STACK * stack);
 extern int stack_traverse(STACK * stack);

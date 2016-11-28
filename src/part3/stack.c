@@ -25,8 +25,10 @@ bool stack_is_empty(STACK * stack)
     return (stack->next == NULL);
 }
 
-int stack_pop(STACK * stack)
+ElemType stack_pop(STACK * stack)
 {
+    ElemType retValue;
+    
     STACK_CHECK_FAIL(stack);
 
     STACK * temp = NULL;
@@ -35,24 +37,26 @@ int stack_pop(STACK * stack)
     {
         temp = stack->next;
         stack->next = stack->next->next;
+        retValue = temp->Element;
         free(temp);
     }
     else
     {
         printf("stack is empty\n");
-        return STACK_RET_NG;
+        return 0;
     }
 
-    return STACK_RET_OK;
+    return retValue;
 }
 
-int stack_push(STACK * stack, ElemType * ele)
+int stack_push(STACK * stack, ElemType ele)
 {
     STACK_CHECK_FAIL(stack);
 
     NODE * node = (NODE *)malloc(sizeof(NODE));
 
-    memcpy(&node->Element, ele, sizeof(ElemType));
+    //memcpy(&node->Element, ele, sizeof(ElemType));
+    node->Element = ele;
     node->next = stack->next;
     stack->next = node;
 
@@ -86,10 +90,12 @@ int stack_make_empty(STACK * stack)
 int stack_traverse(STACK * stack)
 {
     STACK_CHECK_FAIL(stack);
+    
+    printf("\nStack have follow elements : \n");
 
     while(stack && stack->next)
     {
-        printf("element=%c\n", stack->next->Element);
+        printf("element=%d\n", stack->next->Element);
         stack = stack->next;
     }
 
@@ -99,19 +105,19 @@ int stack_traverse(STACK * stack)
 void stack_main_test(void)
 {
     //int a=1, b=2, c=3;
-    char a='q', b='w', c='n';
     
     STACK * stack = stack_init();
 
-    stack_push(stack, &a);
-    stack_push(stack, &b);
-    stack_push(stack, &c);
+    stack_push(stack, 1);
+    stack_push(stack, 2);
+    stack_push(stack, 3);
 
     stack_pop(stack);
     //stack_pop(stack);
     //stack_pop(stack);
+    //stack_push(stack, "1");
 
-    printf("top=%c\n", stack_top(stack));
+    printf("top=%d\n", stack_top(stack));
 
     stack_traverse(stack);
 }

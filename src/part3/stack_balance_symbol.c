@@ -45,7 +45,7 @@ void stack_balance_symbol_main(void)
     {
         if(symbol_is_left(&test[i]))
         {
-            stack_push(stack, &test[i]);
+            //stack_push(stack, &test[i]);
         }
         else if(symbol_is_right(&test[i]))
         {

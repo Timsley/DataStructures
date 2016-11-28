@@ -115,20 +115,12 @@ void queue_traverse(QUEUE *queue)
 
 void queue_main_test(void)
 {
+    int i;
     QUEUE * q = queue_create();
 
-    queue_in(q, 1);
-    queue_in(q, 2);
-    queue_in(q, 3);
-    queue_in(q, 4);
-    queue_in(q, 5);
-    queue_in(q, 6);
-    queue_in(q, 7);
-    queue_in(q, 8);
-    queue_in(q, 9);
-    queue_in(q, 10);
-    queue_in(q, 11);
-    //queue_out(q);
+    for(i=1; i<=10; i++)
+        queue_in(q, i);
+    
     printf("front:%d\n", queue_front(q));
     printf("back:%d\n", queue_back(q));
 

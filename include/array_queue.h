@@ -9,7 +9,6 @@ typedef struct ArrQueue_T
 {
     Position front;
     Position rear;
-    int size;           // current size of the queue
     ElementType * array;
 }ArrQueue;
 
