@@ -14,7 +14,7 @@ bool profix_expression_is_operator(char str)
 
 bool profix_expression_is_num(char str)
 {
-    if('0'<=str && '9'>=str)
+    if(str>='0' && str<='9')
         return true;
     else 
         return false;
@@ -73,10 +73,13 @@ void profix_expression_read(STACK * stack, char * str)
 
 void profix_expression_main_test(void)
 {    
-    char string[] = "6 5 2 3 + 8 * + 3 + *";
-    //char string[] = "6 2 3 + * 2 /";
+    char string[] = "6 5 2 3 + 8 * + 3 + *";        // Infix is 6*(5+(2+3)*8 + 3)
+     //char string[] = "6 2 3 + * 2 /";
     
     STACK * stack = stack_init();
-
+    
+    printf("Standard is  : %s\n", "6 * ( 5 + ( 2 + 3 ) * 8 + 3 )");
+    printf("Profix   is  : %s\n", string);
+    
     profix_expression_read(stack, string);
 }

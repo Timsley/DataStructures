@@ -72,7 +72,7 @@ ElemType stack_top(STACK * stack)
         return stack->next->Element;
     }
 
-    return (ElemType)0;
+    return (ElemType)(-1);
 }
 
 int stack_make_empty(STACK * stack)
@@ -112,6 +112,8 @@ void stack_main_test(void)
     stack_push(stack, 2);
     stack_push(stack, 3);
 
+    stack_pop(stack);
+    stack_pop(stack);
     stack_pop(stack);
     //stack_pop(stack);
     //stack_pop(stack);
