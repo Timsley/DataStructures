@@ -57,7 +57,7 @@ void ex_3_3_2(void)
 
     swap_element(dlist);
     
-    printf("\After Swap : \n");
+    printf("\nAfter Swap : \n");
     doubly_linked_list_traverse_fordward(dlist);
     doubly_linked_list_traverse_backward(dlist);
 }

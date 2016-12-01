@@ -107,12 +107,15 @@ int single_list_uninit(LIST * list)
 void single_list_traverse(LIST * list)
 {
     LIST * pTemp = list->next;
+    
+    printf("List traverse : ");
 
     while(pTemp != NULL)
     {
-        printf("node->element : %d\n", pTemp->value);
+        printf("%2d  ", pTemp->value);
         pTemp = pTemp->next;
     }
+    printf("\n");
 }
 
 
