@@ -2,22 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-
-#define LIST_MAX_LEN 10
-
-typedef int ElemType;
-
-typedef struct Node_T
-{
-	ElemType value;
-	int length;
-	struct Node_T * prev;
-	struct Node_T * next;
-}Node;
-
-typedef struct Node_T DList;
-
+#include "doubly_linked_list.h"
 
 
 DList * doubly_linked_list_init(void)
