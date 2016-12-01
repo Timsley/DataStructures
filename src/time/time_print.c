@@ -2,6 +2,7 @@
 #include <sys/time.h>
 #include "time_print.h"
 
+#define FUNC_EXEC_TIME	100000
 
 static struct timeval start,end; 
 
@@ -22,3 +23,16 @@ void time_print(void)
 //		    printf("time=%f second\n", timeuse); 
 }
 
+void time_main_test(void)
+{
+    int i;
+
+    time_start();
+
+    for(i=0; i<FUNC_EXEC_TIME; i++)
+    //timt_test();
+
+
+    time_stop();
+    time_print();
+}

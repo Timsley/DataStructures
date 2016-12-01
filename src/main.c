@@ -1,38 +1,9 @@
 #include <stdio.h>
-#include "typedef.h"
-#include "time_print.h"
-//#include "part3_list.h"
 
-#define FUNC_EXEC_TIME	100000
 
 int main (int argc, const char * argv[]) 
 {
-//	int i;
-
-//	time_start();
-
-//	for(i=0; i<FUNC_EXEC_TIME; i++)
-    //part1_3_main_test();
-    //link_list_main_test();
-    //polynomial_main_test();
-    //radix_sort_main_test();
-//   multi_lists_main_test();
-//queue_main_test();
-//array_queue_main_test();
-//profix_expression_main_test();
-infix_to_profix_main_test();
-
-//stack_main_test();
-
-
-//    doubly_linked_list_main_test();
-    //array_queue_main_test();
-//    circularly_linked_list_main();
-
-//cunit_test_main();
-
-//	time_stop();
-//	time_print();
+    ex_3_3_1();
 
     return 0;
 }
