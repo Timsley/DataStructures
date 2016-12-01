@@ -3,7 +3,7 @@
 
 int main (int argc, const char * argv[]) 
 {
-    ex_3_4();
+    ex_3_5();
 
     return 0;
 }
