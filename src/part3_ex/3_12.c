@@ -4,6 +4,26 @@
 #include <stdbool.h>
 #include "single_list.h"
 
+void reverse_new(LIST *list)
+{
+    LIST *before, *current, *after;
+
+    before = NULL;
+    current = list->next;
+    after = current->next;
+
+    while(after)
+    {
+        current->next = before;
+        before = current;
+        current = after;
+        after = after->next;
+    }
+
+    current->next = before;
+
+    list->next = current;
+}
 
 void reverse(LIST *list)
 {
@@ -54,6 +74,6 @@ void ex_3_12(void)
 
     printf("\nAfter reverse : \n");
     
-    reverse(list);    
+    reverse_new(list);    
     single_list_traverse(list);   
 }
