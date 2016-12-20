@@ -3,7 +3,7 @@
 
 int main (int argc, const char * argv[]) 
 {
-    ex_3_21();
+    binary_tree_main_test();
 
     return 0;
 }

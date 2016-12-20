@@ -21,11 +21,12 @@ TARGET = main
 DIRS_SRC   += src
 #DIRS_SRC   += src/part1
 #DIRS_SRC   += src/part2
-DIRS_SRC   += src/part3
-DIRS_SRC   += src/part3_ex
-DIRS_SRC   += src/sort
-DIRS_SRC   += src/time
-DIRS_SRC   += src/cunit_test
+#DIRS_SRC   += src/part3
+#DIRS_SRC   += src/part3_ex
+DIRS_SRC   += src/part4
+#DIRS_SRC   += src/sort
+#DIRS_SRC   += src/time
+#DIRS_SRC   += src/cunit_test
 
 
 DIR_FILES  = $(foreach dir, $(DIRS_SRC),$(wildcard $(dir)/*.c))
