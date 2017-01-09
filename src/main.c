@@ -3,7 +3,7 @@
 
 int main (int argc, const char * argv[]) 
 {
-    binary_tree_main_test();
+    binary_search_tree_main();
 
     return 0;
 }

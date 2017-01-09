@@ -2,15 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include "binary_tree.h"
-#include "tree_visual_create.h"
+//#include "tree_visual_create.h"
 
 
 BI_TREE * binary_tree_create(void)
 {
     char ch;
-    scanf("%c",&ch);
     BI_TREE *tree;
     
+    scanf("%c",&ch);    
     //printf("input %c      \n", ch);
 
     if('#' == ch)
@@ -59,11 +59,20 @@ void binary_tree_postorder_traverse(BI_TREE * tree)
     }
 }
 
+void binary_tree_destroy(BI_TREE * tree)
+{
+    if(tree)
+    {
+        binary_tree_destroy(tree->lChild);
+        binary_tree_destroy(tree->rChild);
+        free(tree);
+        tree = NULL;
+    }
+}
+
 void binary_tree_main_test(void)
 {
     BI_TREE  *tree = binary_tree_create();
-
-    printf("value : %c\n", tree->value);
 
     printf("\nPreorder traverse : ");
     binary_tree_preorder_traverse(tree);
@@ -75,5 +84,7 @@ void binary_tree_main_test(void)
     binary_tree_postorder_traverse(tree);
     printf("\n");
 
-    tree_visual_create(tree, "tree.dot");
+    //tree_visual_create(tree, "tree.dot");
+
+    binary_tree_destroy(tree);
 }
