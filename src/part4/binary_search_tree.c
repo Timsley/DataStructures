@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "binary_search_tree.h"
-#include "tree_visual_create.h"
+//#include "tree_visual_create.h"
 
 
 BS_TREE * binary_search_tree_create(void)
@@ -205,7 +205,7 @@ void binary_search_tree_main(void)
 {
     BS_TREE * tree = binary_search_tree_create();
 
-    tree_visual_create(tree, "tree.dot");
+    //tree_visual_create(tree, "tree.dot");
 
     TNode * node;
     node = binary_search_tree_find(tree, 7);
@@ -227,7 +227,7 @@ void binary_search_tree_main(void)
     }
     
     binary_search_tree_insert(tree, 3);    
-    tree_visual_create(tree, "tree2.dot");
+    //tree_visual_create(tree, "tree2.dot");
 
     printf("\nPreorder traverse : ");
     binary_search_tree_preorder_traverse(tree);
@@ -240,7 +240,7 @@ void binary_search_tree_main(void)
     printf("\n");
 
     tree = binary_search_tree_delete(tree, 4);
-    tree_visual_create(tree, "tree3.dot");
+    //tree_visual_create(tree, "tree3.dot");
     
     binary_search_tree_destroy(tree);   
 }

@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "binary_search_tree.h"
+#include "avl_tree.h"
+//#include "binary_search_tree.h"
 #include "tree_visual_create.h"
 
 
-void tree_create_dot(BS_TREE * node, FILE* stream)
+void tree_create_dot(AVL_TREE * node, FILE* stream)
 {
     if(node->lChild)
     {        
@@ -33,7 +34,7 @@ void tree_create_dot(BS_TREE * node, FILE* stream)
     #endif
 }
 
-void tree_visual_create(BS_TREE * tree, char * fileName)
+void tree_visual_create(AVL_TREE * tree, char * fileName)
 {
     FILE * stream = fopen(fileName,"w+");
     if(stream == NULL)
